@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:events_app/screens/house_party_details_screen.dart';
+import 'package:events_app/screens/wedding_details_screen.dart';
 
 class EventsScreen extends StatelessWidget {
   final List<Map<String, String>> events = [
@@ -35,9 +35,8 @@ class EventsScreen extends StatelessWidget {
           'Events',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: 14,
             fontFamily: 'Lexend',
-            fontWeight: FontWeight.w600,
             height: 0,
           ),
         ),
@@ -67,7 +66,7 @@ class EventsScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Color(0xFF60666B),
                     fontSize: 16,
-                    fontFamily: 'Lexend',
+                    fontFamily: 'Inter',
                     height: 1.3,
                   ),
                 ),
@@ -119,11 +118,10 @@ class EventsScreen extends StatelessWidget {
 
   void _navigateToEvent(BuildContext context, String eventName) {
     if (eventName == 'House Party' || eventName == 'Wedding') {
-      // Both Wedding and House Party navigate to the same screen
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HousePartyDetailsScreen(),
+          builder: (context) => WeddingDetailsScreen(),
         ),
       );
     } else {
@@ -210,9 +208,10 @@ class EventCard extends StatelessWidget {
                           SizedBox(height: 8),
                           Text(
                             title,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: 13.35,
                               fontFamily: 'Lexend',
                               height: 0,
                             ),
@@ -250,17 +249,9 @@ class EventCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 13.35,
                     fontFamily: 'Lexend',
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
+                    height: 0,
                   ),
                 ),
               ),

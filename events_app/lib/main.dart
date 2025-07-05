@@ -618,8 +618,8 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                     ),
                     child: FadeTransition(
                       opacity: _fadeAnimation,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Logo
                           Container(
@@ -788,7 +788,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+            Text(
                                   'Already have an account? ',
                                   style: GoogleFonts.lexend(
                                     color: Color(0xFF60666B),

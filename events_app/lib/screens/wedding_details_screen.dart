@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 
-class WeddingDetailsScreen extends StatelessWidget {
+class WeddingDetailsScreen extends StatefulWidget {
+  @override
+  _WeddingDetailsScreenState createState() => _WeddingDetailsScreenState();
+}
+
+class _WeddingDetailsScreenState extends State<WeddingDetailsScreen> {
+  int selectedServiceTab = 0; // 0 for Bulk Food Delivery, 1 for Catering Service
+  int selectedCategoryTab = 0; // 0 for ALL, 1 for Breakfast, 2 for Lunch & Dinner, 3 for Snacks
+  
+  final List<String> serviceTabs = ['Bulk Food Delivery', 'Catering Service'];
+  final List<String> categoryTabs = ['ALL', 'Breakfast', 'Lunch & Dinner', 'Snacks'];
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    
     return Scaffold(
-      backgroundColor: Color(0xFFF5F6FB),
+      backgroundColor: Color(0xFFF8F9FA), // Brighter background
       body: Stack(
         children: [
           // Banner and header
@@ -12,11 +25,11 @@ class WeddingDetailsScreen extends StatelessWidget {
             left: 0,
             top: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 258,
+              width: screenWidth,
+              height: 280, // Reduced height to move pill tabs up
               child: Stack(
                 children: [
-                  // Banner image
+                  // Banner image - Wedding image only
                   Positioned.fill(
                     child: Image.asset(
                       'assets/images/wedding.png',
@@ -26,7 +39,7 @@ class WeddingDetailsScreen extends StatelessWidget {
                           color: Color(0xFF6318AF),
                           child: Center(
                             child: Icon(
-                              Icons.event,
+                              Icons.favorite,
                               size: 80,
                               color: Colors.white,
                             ),
@@ -35,7 +48,7 @@ class WeddingDetailsScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  // Dark overlay for better text readability
+                  // Lighter dark overlay for brighter appearance
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
@@ -43,8 +56,8 @@ class WeddingDetailsScreen extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Colors.black.withOpacity(0.3),
-                            Colors.black.withOpacity(0.6),
+                            Colors.black.withOpacity(0.2),
+                            Colors.black.withOpacity(0.4),
                           ],
                         ),
                       ),
@@ -63,7 +76,7 @@ class WeddingDetailsScreen extends StatelessWidget {
                           end: Alignment.topCenter,
                           colors: [
                             Colors.black.withOpacity(0),
-                            Colors.black.withOpacity(0.8),
+                            Colors.black.withOpacity(0.6),
                           ],
                         ),
                       ),
@@ -127,91 +140,66 @@ class WeddingDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Tabs
+                  // Segmented Pill Tabs for Service Types - Moved up
                   Positioned(
-                    left: 0,
-                    top: 172,
+                    left: 16,
+                    right: 16,
+                    bottom: 60, // Moved higher
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 86,
-                      child: Column(
-                        children: [
-                          // Tabs
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 12),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(12),
-                                        topRight: Radius.circular(12),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          blurRadius: 8,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Bulk Food Delivery',
-                                        style: TextStyle(
-                                          color: Color(0xFF6318AF),
-                                          fontSize: 14,
-                                          fontFamily: 'Lexend',
-                                          fontWeight: FontWeight.w600,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 12),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.8),
-                                      border: Border.all(color: Color(0xFFE4E5E6)),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Catering Service',
-                                        style: TextStyle(
-                                          color: Color(0xFF60666B),
-                                          fontSize: 14,
-                                          fontFamily: 'Lexend',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Category Tabs
-                          Container(
-                            height: 44,
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Row(
-                              children: [
-                                _categoryTab('ALL', '(8)', Color(0xFFE70472), isActive: true),
-                                _categoryTab('Breakfast', '', Color(0xFF60666B)),
-                                _categoryTab('Lunch & Dinner', '', Color(0xFF60666B)),
-                                _categoryTab('Snacks', '', Color(0xFF60666B)),
-                              ],
-                            ),
+                      height: 55, // Increased height for bigger text
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(27.5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
                           ),
                         ],
+                      ),
+                      child: Row(
+                        children: serviceTabs.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          String tab = entry.value;
+                          bool isActive = selectedServiceTab == index;
+                          
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedServiceTab = index;
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: isActive ? Colors.white : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(23.5),
+                                  boxShadow: isActive ? [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ] : null,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    tab,
+                                    style: TextStyle(
+                                      color: isActive ? Color(0xFF6318AF) : Color(0xFF60666B),
+                                      fontSize: 16, // Increased font size
+                                      fontFamily: 'Lexend',
+                                      fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
@@ -219,38 +207,88 @@ class WeddingDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Content
+          // Category Tabs (Responsive and stretched to screen size)
           Positioned(
             left: 0,
-            top: 274,
+            top: 280,
+            right: 0,
+            child: Container(
+              height: 60,
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Stretch to screen size
+                children: categoryTabs.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  String category = entry.value;
+                  bool isActive = selectedCategoryTab == index;
+                  
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedCategoryTab = index;
+                        });
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 4),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    category,
+                                    style: TextStyle(
+                                      color: isActive ? Color(0xFFE70472) : Color(0xFF60666B),
+                                      fontSize: 12,
+                                      fontFamily: 'Lexend',
+                                      fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                                      height: 0,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                if (index == 0) // Show count only for ALL
+                                  Text(
+                                    ' (8)',
+                                    style: TextStyle(
+                                      color: isActive ? Color(0xFFE70472) : Color(0xFF60666B),
+                                      fontSize: 12,
+                                      fontFamily: 'Lexend',
+                                      fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                                      height: 0,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            if (isActive)
+                              Container(
+                                margin: EdgeInsets.only(top: 8),
+                                height: 2,
+                                width: 30,
+                                color: Color(0xFFE70472),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+          // Content based on selected service tab and category
+          Positioned(
+            left: 0,
+            top: 340,
             right: 0,
             bottom: 80,
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                children: [
-                  SizedBox(height: 16),
-                  _foodCard(
-                    context,
-                    image: 'assets/images/south_breakfast.png',
-                    title: 'Wedding Special Breakfast',
-                    min: 50,
-                    max: 500,
-                    price: 599,
-                    categories: '15 Categories & 60 Items',
-                  ),
-                  SizedBox(height: 16),
-                  _foodCard(
-                    context,
-                    image: 'assets/images/samosa_plate.png',
-                    title: 'Grand Wedding Feast',
-                    min: 50,
-                    max: 500,
-                    price: 899,
-                    categories: '20 Categories & 80 Items',
-                  ),
-                ],
-              ),
+              padding: EdgeInsets.all(16),
+              child: _buildContent(),
             ),
           ),
           // Bottom Cart Bar
@@ -278,9 +316,9 @@ class WeddingDetailsScreen extends StatelessWidget {
                       _cartImage('assets/images/samosa_plate.png'),
                       SizedBox(width: 8),
                       Text(
-                        '2 Platters',
+                        '3 Platters',
                         style: TextStyle(
-                          color: Colors.black.withOpacity(0.6),
+                          color: Colors.black.withOpacity(0.5),
                           fontSize: 15.33,
                           fontFamily: 'Lexend',
                           height: 0,
@@ -322,46 +360,73 @@ class WeddingDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _categoryTab(String label, String count, Color color, {bool isActive = false}) {
+  Widget _buildContent() {
+    // Show "No Platters Available" for Snacks category
+    if (selectedCategoryTab == 3) { // Snacks
+      return _buildNoPlattersAvailable();
+    }
+    
+    // Show food content for both service types when not Snacks
+    return _buildFoodContent();
+  }
+
+  Widget _buildNoPlattersAvailable() {
     return Container(
-      margin: EdgeInsets.only(right: 16),
+      height: 300,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Text(
-                label,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 12,
-                  fontFamily: 'Lexend',
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                  height: 0,
-                ),
-              ),
-              if (count.isNotEmpty)
-                Text(
-                  count,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 12,
-                    fontFamily: 'Lexend',
-                    fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                    height: 0,
-                  ),
-                ),
-            ],
-          ),
-          if (isActive)
-            Container(
-              margin: EdgeInsets.only(top: 4),
-              height: 2,
-              width: 30,
-              color: Color(0xFFE70472),
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[200],
             ),
+            child: Icon(
+              Icons.close,
+              size: 40,
+              color: Colors.grey[400],
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            'No Platters Available',
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.6),
+              fontSize: 16,
+              fontFamily: 'Lexend',
+              height: 0,
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _buildFoodContent() {
+    return Column(
+      children: [
+        _foodCard(
+          context,
+          image: 'assets/images/south_breakfast.png',
+          title: 'South Breakfast',
+          min: 50,
+          max: 500,
+          price: 299,
+          categories: '15 Categories & 60 Items',
+        ),
+        SizedBox(height: 16),
+        _foodCard(
+          context,
+          image: 'assets/images/samosa_plate.png',
+          title: 'Samosa Platter',
+          min: 50,
+          max: 500,
+          price: 899,
+          categories: '20 Categories & 80 Items',
+        ),
+      ],
     );
   }
 
@@ -455,11 +520,10 @@ class WeddingDetailsScreen extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
+                      color: Colors.black.withOpacity(0.8), // Increased opacity
+                      fontSize: 16,
                       fontFamily: 'Lexend',
-                      fontWeight: FontWeight.bold,
-                      height: 1.2,
+                      height: 0,
                     ),
                   ),
                   SizedBox(height: 12),
@@ -495,10 +559,9 @@ class WeddingDetailsScreen extends StatelessWidget {
                           Text(
                             '₹$price',
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
+                              color: Colors.black.withOpacity(0.8), // Increased opacity
+                              fontSize: 16,
                               fontFamily: 'Lexend',
-                              fontWeight: FontWeight.bold,
                               height: 0,
                             ),
                           ),

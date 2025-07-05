@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WeddingCateringScreen extends StatefulWidget {
@@ -62,11 +61,12 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                                 SizedBox(width: 24),
                                 Text(
                                   '9:41',
-                                  style: GoogleFonts.inter(
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
+                                    fontFamily: 'Inter',
+                                    height: 0,
                                     letterSpacing: 0.07,
-                                    height: 1,
                                   ),
                                 ),
                               ],
@@ -94,10 +94,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                                 ),
                                 Text(
                                   'Wedding',
-                                  style: GoogleFonts.lexend(
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
-                                    height: 1,
+                                    fontFamily: 'Lexend',
+                                    height: 0,
                                   ),
                                 ),
                                 SizedBox(width: 42),
@@ -139,12 +140,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                                       child: Center(
                                         child: Text(
                                           'Bulk Food Delivery',
-                                          style: GoogleFonts.lexend(
-                                            color: selectedTab == 0
-                                                ? Color(0xFF60666B)
-                                                : Color(0xFF60666B),
+                                          style: TextStyle(
+                                            color: Color(0xFF60666B),
                                             fontSize: 14,
-                                            height: 1,
+                                            fontFamily: 'Lexend',
+                                            height: 0,
                                           ),
                                         ),
                                       ),
@@ -169,12 +169,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                                       child: Center(
                                         child: Text(
                                           'Catering Service',
-                                          style: GoogleFonts.lexend(
-                                            color: selectedTab == 1
-                                                ? Color(0xFF6318AF)
-                                                : Color(0xFF60666B),
+                                          style: TextStyle(
+                                            color: Color(0xFF6318AF),
                                             fontSize: 14,
-                                            height: 1,
+                                            fontFamily: 'Lexend',
+                                            height: 0,
                                           ),
                                         ),
                                       ),
@@ -201,23 +200,29 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                                         children: [
                                           Text(
                                             categories[i],
-                                            style: GoogleFonts.lexend(
+                                            style: TextStyle(
                                               color: selectedCategoryIndex == i && categories[i] == 'Snacks'
+                                                  ? Color(0xFFE70472)
+                                                  : selectedCategoryIndex == i && categories[i] == 'ALL'
                                                   ? Color(0xFFE70472)
                                                   : Color(0xFF60666B),
                                               fontSize: 12,
-                                              height: 1,
+                                              fontFamily: 'Lexend',
+                                              height: 0,
                                             ),
                                           ),
                                           if (categories[i] == 'ALL' || (selectedCategoryIndex == i && categories[i] == 'Snacks'))
                                             Text(
-                                              categories[i] == 'ALL' ? ' (8)' : ' (8)',
-                                              style: GoogleFonts.lexend(
+                                              ' (8)',
+                                              style: TextStyle(
                                                 color: selectedCategoryIndex == i && categories[i] == 'Snacks'
+                                                    ? Color(0xFFE70472)
+                                                    : selectedCategoryIndex == i && categories[i] == 'ALL'
                                                     ? Color(0xFFE70472)
                                                     : Color(0xFF60666B),
                                                 fontSize: 12,
-                                                height: 1,
+                                                fontFamily: 'Lexend',
+                                                height: 0,
                                               ),
                                             ),
                                         ],
@@ -260,10 +265,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                       SizedBox(width: 8),
                       Text(
                         '3 Platters',
-                        style: GoogleFonts.lexend(
-                          color: Colors.black.withOpacity(0.2),
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.20000000298023224),
                           fontSize: 15.33,
-                          height: 1,
+                          fontFamily: 'Lexend',
+                          height: 0,
                         ),
                       ),
                     ],
@@ -281,10 +287,12 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                       children: [
                         Text(
                           'View Cart',
-                          style: GoogleFonts.lexend(
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
-                            height: 1,
+                            fontFamily: 'Lexend',
+                            height: 0,
                           ),
                         ),
                         SizedBox(width: 4),
@@ -330,10 +338,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
             SizedBox(height: 16),
             Text(
               'No Platters Available',
-              style: GoogleFonts.lexend(
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 14,
-                height: 1,
+                fontFamily: 'Lexend',
+                height: 0,
               ),
             ),
           ],
@@ -428,10 +437,12 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                   ),
                   child: Text(
                     'Popular',
-                    style: GoogleFonts.lexend(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
-                      height: 1,
+                      fontFamily: 'Lexend',
+                      height: 0,
                     ),
                   ),
                 ),
@@ -445,10 +456,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.lexend(
-                    color: Colors.black.withOpacity(0.2),
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.20000000298023224),
                     fontSize: 16,
-                    height: 1,
+                    fontFamily: 'Lexend',
+                    height: 0,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -459,13 +471,38 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                       children: [
                         Icon(Icons.people, size: 14, color: Color(0xFF60666B)),
                         SizedBox(width: 6),
-                        Text(
-                          'Min $min - Max $max',
-                          style: GoogleFonts.lexend(
-                            color: Color(0xFF60666B),
-                            fontSize: 12,
-                            height: 1,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              'Min 10',
+                              style: TextStyle(
+                                color: Color(0xFF60666B),
+                                fontSize: 12,
+                                fontFamily: 'Lexend',
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(width: 2),
+                            Text(
+                              '-',
+                              style: TextStyle(
+                                color: Color(0xFF60666B),
+                                fontSize: 11,
+                                fontFamily: 'Lexend',
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(width: 2),
+                            Text(
+                              'Max 120',
+                              style: TextStyle(
+                                color: Color(0xFF60666B),
+                                fontSize: 12,
+                                fontFamily: 'Lexend',
+                                height: 0,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -473,18 +510,20 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                       children: [
                         Text(
                           'Starts at  ',
-                          style: GoogleFonts.lexend(
+                          style: TextStyle(
                             color: Color(0xFF60666B),
                             fontSize: 16,
-                            height: 1,
+                            fontFamily: 'Lexend',
+                            height: 0,
                           ),
                         ),
                         Text(
                           '₹$price',
-                          style: GoogleFonts.lexend(
-                            color: Colors.black.withOpacity(0.2),
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.20000000298023224),
                             fontSize: 16,
-                            height: 1,
+                            fontFamily: 'Lexend',
+                            height: 0,
                           ),
                         ),
                       ],
@@ -494,10 +533,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
                 SizedBox(height: 12),
                 Text(
                   categories,
-                  style: GoogleFonts.lexend(
+                  style: TextStyle(
                     color: Color(0xFF6318AF),
                     fontSize: 14,
-                    height: 1,
+                    fontFamily: 'Lexend',
+                    height: 0,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -521,10 +561,11 @@ class _WeddingCateringScreenState extends State<WeddingCateringScreen> {
       padding: const EdgeInsets.only(right: 12),
       child: Text(
         text,
-        style: GoogleFonts.lexend(
+        style: TextStyle(
           color: Color(0xFF484C50),
           fontSize: 12,
-          height: 1,
+          fontFamily: 'Lexend',
+          height: 0,
         ),
       ),
     );
