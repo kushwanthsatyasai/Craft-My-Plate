@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "485630104046",
+    "project_id": "craft-my-plate-25b3f",
+    "storage_bucket": "craft-my-plate-25b3f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485630104046:android:cd5af2a065d33496fb3eff",
+        "android_client_info": {
+          "package_name": "com.example.craftmyplate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcjm1zkyFr8K7CX21yRfyxIRXUfSpEluU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
